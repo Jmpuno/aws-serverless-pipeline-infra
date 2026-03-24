@@ -1,5 +1,5 @@
 variable "project_name"{
-    description = "variable for out project name"
+    description = "variable for our project name"
     type = string
 }
 variable "environment" {
