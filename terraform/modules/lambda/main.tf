@@ -19,10 +19,14 @@ resource "aws_lambda_function" "trigger_lambda"{
     code_sha256 = data.archive_file.trigger_lambda.output_base64sha256
     runtime = "python3.14"
 
+    dead_letter_config{
+        target_arn = var.dlq_arn
+    }
+
     environment {
         variables = {
             ENVIRONMENT = var.environment
-            LOG_LEVEL   = "info"
+            LOG_LEVEL   = var.log_level
         }
     }
 
@@ -30,6 +34,13 @@ resource "aws_lambda_function" "trigger_lambda"{
         Project = var.project_name
         Environment = var.environment
     }
+
+    logging_config {
+    log_format            = "JSON"
+    application_log_level = var.log_level
+    system_log_level      = "WARN"
+    log_group             = var.trigger_lambda_log_group
+  }
 }
 
 
@@ -46,7 +57,7 @@ resource "aws_lambda_function" "lambda_worker"{
    environment{
         variables = {
             ENVIRONMENT = var.environment
-            LOG_LEVEL   = "info"
+            LOG_LEVEL   = var.log_level
         }
    }
 
@@ -54,4 +65,12 @@ resource "aws_lambda_function" "lambda_worker"{
         Project = var.project_name
         Environment = var.environment
     }
+
+
+    logging_config {
+    log_format            = "JSON"
+    application_log_level = var.log_level
+    system_log_level      = "WARN"
+    log_group             = var.lambda_worker_log_group
+  }
 }

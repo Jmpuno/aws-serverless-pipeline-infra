@@ -9,6 +9,8 @@ variable "environment"{
     type = string
 }
 
+
+#IAM ROLES FOR LAMBDA FUNCTIONS
 variable "lambda_worker_role_arn"{
     description = "IAM role arn for lambda_worker"
     type = string
@@ -18,3 +20,31 @@ variable "trigger_lambda_role_arn"{
     description = "IAM role arn for trigger_lambda"
     type = string
 }
+
+
+#LOG GROUPS FOR LAMBDA FUNCTIONS
+variable "lambda_worker_log_group" {
+    description = "Log group for our lambda worker"
+    type = string
+}
+
+variable "trigger_lambda_log_group" {
+    description = "Log group for our trigger lambda"
+    type = string
+}
+
+
+#log_level
+variable "log_level" {
+    description = "log_level for lambda function"
+    type = string
+    default = "info"
+}
+
+
+#DQL ARN
+variable "dlq_arn"{
+    description = "DLQ ARN for Lambda Trigger"
+    type = string
+}
+
