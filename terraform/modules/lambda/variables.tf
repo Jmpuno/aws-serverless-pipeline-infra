@@ -43,8 +43,15 @@ variable "log_level" {
 
 
 #DQL ARN
-variable "dlq_arn"{
+variable "lambda_dlq_arn"{
     description = "DLQ ARN for Lambda Trigger"
     type = string
 }
 
+
+#SQS ARN
+
+variable "lambda_worker_queue_arn" {
+    description = "SQS arn for lambda worker"
+    type = string
+}

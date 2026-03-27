@@ -10,6 +10,10 @@ data "archive_file" "trigger_lambda"{
     output_path = "${path.module}/../../../src/builds/trigger_lambda.zip"
 }
 
+resource "aws_sqs_queue" "trigger_lambda_dlq"{
+    name = "${var.project_name}-${var.environment}-trigger-lambda-dql"
+}
+
 
 resource "aws_lambda_function" "trigger_lambda"{
     filename = data.archive_file.trigger_lambda.output_path
@@ -20,7 +24,7 @@ resource "aws_lambda_function" "trigger_lambda"{
     runtime = "python3.14"
 
     dead_letter_config{
-        target_arn = var.dlq_arn
+        target_arn = var.lambda_dlq_arn
     }
 
     environment {
@@ -43,6 +47,13 @@ resource "aws_lambda_function" "trigger_lambda"{
   }
 }
 
+
+resource "aws_lambda_event_source_mapping" "lambda_worker_trigger"{
+    event_source_arn = var.lambda_worker_queue_arn
+    function_name = "${var.project_name}-${var.environment}-lambda-worker"
+    batch_size = 1
+    enabled = true
+}
 
 
 
