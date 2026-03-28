@@ -10,8 +10,3 @@ variable "environment"{
 }
 
 
-#DQL ARN
-variable "sqs_dlq_arn"{
-    description = "DLQ ARN for SQS"
-    type = string
-}

@@ -15,11 +15,6 @@ resource "aws_iam_role" "trigger_lambda"{
 
     })
 
-    tags = {
-        Project = var.project_name
-        Environment = var.environment
-    }
-
 }
 
 resource "aws_iam_role" "lambda_worker"{
@@ -39,8 +34,4 @@ resource "aws_iam_role" "lambda_worker"{
 
     })
 
-     tags = {
-        Project = var.project_name
-        Environment = var.environment
-    }
 }
