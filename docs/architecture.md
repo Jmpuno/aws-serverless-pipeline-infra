@@ -15,3 +15,15 @@ in the current architecture.
 
 **Trade-off accepted:** No network-level isolation.
 Mitigation: Strict IAM least-privilege policies per service.
+
+
+
+## File Upload Approach
+
+Decision: Lambda Function URL para sa presigned URL generation
+
+Reason: Single function lang ang kailangan — 
+API Gateway ay overkill para sa use case na ito.
+
+When to revisit: Kapag kailangan na ng multiple 
+endpoints, VPC integration, o complex auth.
