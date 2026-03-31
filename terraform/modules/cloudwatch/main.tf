@@ -10,3 +10,8 @@ resource "aws_cloudwatch_log_group" "lambda_worker"{
 
     retention_in_days = 30
 }
+resource "aws_cloudwatch_log_group" "lambda_s3_url_generator"{
+    name = "/aws/lambda/${var.project_name}-${var.environment}-lambda-s3-url-generator"
+
+    retention_in_days = 30
+}
