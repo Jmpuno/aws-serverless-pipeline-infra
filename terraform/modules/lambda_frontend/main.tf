@@ -5,13 +5,13 @@ data "archive_file" "lambda_s3_url_generator"{
 }
 
 resource "aws_lambda_function_url" "lambda_s3_url"{
-  function_name      = "${var.project_name}-${var.environment}-lambda-s3-url"
-  authorization_type = "AWS_IAM"
+  function_name      = aws_lambda_function.lambda_s3_url_generator.function_name
+  authorization_type = "NONE"
 
   cors {
     allow_credentials = true
-    allow_origins     = var.allowed_origin
-    allow_methods     = ["GET,"PUT"]
+    allow_origins     = [var.allowed_origin]
+    allow_methods     = ["GET","PUT"]
     allow_headers     = ["date", "keep-alive", "content-type"]
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400
@@ -21,7 +21,7 @@ resource "aws_lambda_function_url" "lambda_s3_url"{
 
 
 resource "aws_lambda_function" "lambda_s3_url_generator"{
-    filename = data.archive_file.lambda_worker.output_path
+    filename = data.archive_file.lambda_s3_url_generator.output_path
     function_name = "${var.project_name}-${var.environment}-lambda-s3-url-generator"
     role = var.lambda_s3_url_generator_role_arn
     handler = "lambda_s3_url_generator.lambda_handler"
@@ -32,6 +32,7 @@ resource "aws_lambda_function" "lambda_s3_url_generator"{
         variables = {
             ENVIRONMENT = var.environment
             LOG_LEVEL   = var.log_level
+            BUCKET_NAME = var.bucket_name
         }
    }
 

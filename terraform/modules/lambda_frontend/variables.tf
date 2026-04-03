@@ -3,10 +3,6 @@ variable "allowed_origin" {
   type        = string
 }
 
-variable "lambda_s3_url_generator_role_arn"{
-    description = "ARN for our lambda function role"
-    type = string
-}
 
 variable "project_name"{
     description = "variable for project name"
@@ -21,11 +17,16 @@ variable "environment"{
 
 
 variable "lambda_s3_url_generator_role_arn"{
-    description = "IAM role arn for trigger_lambda"
+    description = "IAM role arn for our s3 url generator"
     type = string
 }
 
 variable "lambda_s3_url_generator_log_group" {
     description = "Log group for our trigger lambda"
+    type = string
+}
+
+variable "bucket_name"{
+    description = "S3 bucket name for presigned URL generation"
     type = string
 }
