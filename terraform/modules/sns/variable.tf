@@ -9,11 +9,6 @@ variable "environment"{
     type = string
 }
 
-variable "user_email"{
-    description = "Email address of the user"
-    type = string
-}
-
 variable "admin_email"{
     description = "Email address of the admin"
     type = string
