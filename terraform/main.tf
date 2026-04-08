@@ -11,7 +11,7 @@ terraform {
 
 provider "aws" {
   region = "ap-southeast-1"
-  default_tags = {
+  default_tags {
         tags = {
           Project     = var.project_name
           Environment = var.environment
@@ -35,8 +35,8 @@ module "lambda"{
   environment = var.environment
 
   #IAM ROLES
-  lambda_worker_role = module.iam.lambda_worker_role
-  trigger_lambda_role = module.iam.trigger_lambda_role
+  lambda_worker_role_arn = module.iam.lambda_worker_role
+  trigger_lambda_role_arn = module.iam.trigger_lambda_role
 
   #CLOUD WATCH LOG GROUPS
   lambda_worker_log_group = module.cloudwatch.lambda_worker_logs
@@ -44,7 +44,13 @@ module "lambda"{
   log_level = var.log_level
 
   #SQS 
-  lambda_worker_queue_arn = module.sqs.sqs_queue_dlq_arn
+  lambda_worker_queue_arn = module.sqs.lambda_worker_queue_arn
+
+  #SNS
+  sns_topic_arn = module.sns.sns_topic_arn
+
+  #DYNAMODB
+  dynamodb_table_name = module.dynamodb.dynamodb_table_name
 }
 
 module "lambda_frontend"{

@@ -63,6 +63,8 @@ resource "aws_lambda_function" "lambda_worker"{
         variables = {
             ENVIRONMENT = var.environment
             LOG_LEVEL   = var.log_level
+            SNS_TOPIC_ARN       = var.sns_topic_arn
+            DYNAMODB_TABLE_NAME = var.dynamodb_table_name
         }
    }
 

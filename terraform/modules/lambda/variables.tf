@@ -55,3 +55,13 @@ variable "lambda_worker_queue_arn" {
     description = "SQS arn for lambda worker"
     type = string
 }
+
+variable "sns_topic_arn" {
+    description = "SNS topic ARN for worker lambda notifications"
+    type        = string
+}
+
+variable "dynamodb_table_name" {
+    description = "DynamoDB table name for storing results"
+    type        = string
+}
