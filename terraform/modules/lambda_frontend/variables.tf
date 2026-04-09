@@ -30,3 +30,9 @@ variable "bucket_name"{
     description = "S3 bucket name for presigned URL generation"
     type = string
 }
+
+variable "log_level" {
+    description = "log_level for lambda function"
+    type = string
+    default = "info"
+}

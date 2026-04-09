@@ -23,3 +23,10 @@ variable "admin_email"{
     description = "Email address of the admin"
     type = string
 }
+
+
+variable "log_level" {
+    description = "log_level for lambda function"
+    type = string
+    default = "info"
+}

@@ -65,6 +65,7 @@ module "lambda_frontend"{
 
   #CLOUDWATCH LOG GROUPS
   lambda_s3_url_generator_log_group = module.cloudwatch.lambda_s3_url_generator_logs
+  log_level = var.log_level
 
   #S3 BUCKET name
   bucket_name = module.s3.bucket_name
