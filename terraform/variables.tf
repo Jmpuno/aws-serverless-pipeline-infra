@@ -9,6 +9,7 @@ variable "environment"{
     default = "dev"
 }
 
+
 variable "aws_account_id" {
     description = "variable for our aws account identification"
     type = string
