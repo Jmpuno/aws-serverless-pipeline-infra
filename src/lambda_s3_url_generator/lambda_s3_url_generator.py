@@ -17,7 +17,7 @@ ACCEPTED_FILE_TYPES = [
 ]
 
 CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "http://localhost:5500",
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Methods": "POST,OPTIONS"
 }
@@ -79,7 +79,6 @@ def lambda_handler(event, context):
             "statusCode":500,
             "headers":CORS_HEADERS,
             "body":json.dumps({
-                "error": "Internal server error",
-                "details": str(e)
+                "error": "Internal server error"
             })
         }
