@@ -56,6 +56,11 @@ variable "lambda_worker_queue_arn" {
     type = string
 }
 
+variable "lambda_worker_queue_url" {
+    description = "sqs url for trigger lambda"
+    type = string
+}
+
 variable "sns_topic_arn" {
     description = "SNS topic ARN for worker lambda notifications"
     type        = string

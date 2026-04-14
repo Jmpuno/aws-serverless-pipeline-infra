@@ -45,6 +45,7 @@ module "lambda"{
 
   #SQS 
   lambda_worker_queue_arn = module.sqs.lambda_worker_queue_arn
+  lambda_worker_queue_url = module.sqs.lambda_worker_queue_url
 
   #SNS
   sns_topic_arn = module.sns.sns_topic_arn
