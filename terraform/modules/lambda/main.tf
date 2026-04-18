@@ -36,6 +36,8 @@ resource "aws_lambda_function" "trigger_lambda"{
             ENVIRONMENT = var.environment
             LOG_LEVEL   = var.log_level
             SQS_QUEUE_URL = var.lambda_worker_queue_url
+            BUCKET_NAME   = var.bucket_name
+            
         }
     }
 

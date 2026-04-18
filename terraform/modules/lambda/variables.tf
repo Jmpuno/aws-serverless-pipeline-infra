@@ -70,3 +70,8 @@ variable "dynamodb_table_name" {
     description = "DynamoDB table name for storing results"
     type        = string
 }
+
+variable "bucket_name"{
+    description = "s3 bucket name for our lambda"
+    type = string
+}

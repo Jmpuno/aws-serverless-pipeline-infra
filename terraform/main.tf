@@ -52,6 +52,9 @@ module "lambda"{
 
   #DYNAMODB
   dynamodb_table_name = module.dynamodb.dynamodb_table_name
+
+  #S3 
+  bucket_name = module.s3.bucket_name
 }
 
 module "lambda_frontend"{
