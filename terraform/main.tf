@@ -50,6 +50,9 @@ module "lambda"{
   #SNS
   sns_topic_arn = module.sns.sns_topic_arn
 
+  #SES
+  ses_sender_email = var.admin_email
+
   #DYNAMODB
   dynamodb_table_name = module.dynamodb.dynamodb_table_name
 
@@ -94,6 +97,11 @@ module "sns"{
 
   project_name = var.project_name
   environment = var.environment
+  admin_email = var.admin_email
+}
+
+module "ses"{
+  source = "./modules/ses"
   admin_email = var.admin_email
 }
 

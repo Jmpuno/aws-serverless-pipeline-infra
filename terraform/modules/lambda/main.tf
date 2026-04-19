@@ -37,7 +37,6 @@ resource "aws_lambda_function" "trigger_lambda"{
             LOG_LEVEL   = var.log_level
             SQS_QUEUE_URL = var.lambda_worker_queue_url
             BUCKET_NAME   = var.bucket_name
-            
         }
     }
 
@@ -68,6 +67,7 @@ resource "aws_lambda_function" "lambda_worker"{
             LOG_LEVEL   = var.log_level
             SNS_TOPIC_ARN       = var.sns_topic_arn
             DYNAMODB_TABLE_NAME = var.dynamodb_table_name
+            SES_SENDER_EMAIL = var.ses_sender_email
         }
    }
 
