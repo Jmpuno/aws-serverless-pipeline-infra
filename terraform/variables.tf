@@ -10,10 +10,6 @@ variable "environment"{
 }
 
 
-variable "aws_account_id" {
-    description = "variable for our aws account identification"
-    type = string
-}
 
 variable "allowed_origin" {
   description = "Allowed origin for CORS"

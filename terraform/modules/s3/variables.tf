@@ -8,7 +8,7 @@ variable "environment"{
     type = string
 }
 
-variable "aws_account_id" {
-    description = "aws account id for our s3 bucket name"
+variable "trigger_lambda_arn" {
+    description = "trigger lambda arn for our s3 notification"
     type = string
 }

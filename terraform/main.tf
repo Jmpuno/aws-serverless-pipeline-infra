@@ -24,7 +24,9 @@ module "s3"{
 
   project_name = var.project_name
   environment = var.environment
-  aws_account_id = var.aws_account_id
+
+  #TRIGGER LAMBDA
+  trigger_lambda_arn = module.lambda.trigger_lambda_arn
 }
 
 module "lambda"{
