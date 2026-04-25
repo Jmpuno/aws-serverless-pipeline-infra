@@ -85,6 +85,13 @@ module "iam"{
 
   project_name = var.project_name
   environment = var.environment
+
+
+  bucket_arn = module.s3.bucket_arn
+
+
+  sqs_queue_arn = module.sqs.lambda_worker_queue_arn
+  sqs_dlq_arn   = module.lambda.trigger_lambda_dlq_arn
 }
 
 module "sqs"{
