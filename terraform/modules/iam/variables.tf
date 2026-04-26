@@ -24,3 +24,17 @@ variable "bucket_arn"{
     type = string
 }
 
+variable "dynamodb_table_arn"{
+    description = "dynamo database table arn for policy"
+    type = string
+}
+
+variable "admin_email_identity_arn"{
+    description = "Ses admin email identity arn for policy"
+    type = string
+}
+
+variable "sns_topic_arn"{
+    description = "SNS topic arn for policy"
+    type = string
+}

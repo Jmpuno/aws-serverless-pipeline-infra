@@ -92,6 +92,13 @@ module "iam"{
 
   sqs_queue_arn = module.sqs.lambda_worker_queue_arn
   sqs_dlq_arn   = module.lambda.trigger_lambda_dlq_arn
+
+  dynamodb_table_arn = module.dynamodb.dynamodb_table_arn
+
+  admin_email_identity_arn = module.ses.admin_email_identity_arn
+
+  sns_topic_arn = module.sns.sns_topic_arn
+
 }
 
 module "sqs"{
