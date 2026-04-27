@@ -11,7 +11,7 @@ resource "aws_lambda_function_url" "lambda_s3_url"{
   cors {
     allow_credentials = true
     allow_origins     = [var.allowed_origin]
-    allow_methods     = ["GET","PUT"]
+    allow_methods     = ["GET","PUT","POST"]
     allow_headers     = ["date", "keep-alive", "content-type"]
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400

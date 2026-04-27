@@ -84,46 +84,35 @@ def save_to_dynamodb(file_data):
     
 def send_email_notification(file_data):
     try:
-        subject = f"File Uploaded: {file_data['file_name']}"
+        subject = f"File Processed: {file_data['file_name']}"
         body = f"""
         Hello,
 
-        A new file has been uploaded to S3.
+        A file has been processed successfully.
 
         File Name: {file_data['file_name']}
         File Size: {file_data['file_size']} bytes
-        S3 Bucket: {file_data['s3_bucket']}
-        S3 Key: {file_data['s3_key']}
+        Uploader Email: {file_data['uploader_email']}
         Upload Timestamp: {file_data['upload_timestamp']}
+        Process Result: {file_data.get('status', 'unknown')}
 
         Best regards,
-        Your Lambda Worker
+        Your Pipeline
         """
         ses.send_email(
             Source=SES_SENDER_EMAIL,
-            Destination={'ToAddresses': [file_data['uploader_email']]},
+            Destination={'ToAddresses': [SES_SENDER_EMAIL]},  
             Message={
                 'Subject': {'Data': subject},
                 'Body': {'Text': {'Data': body}}
             }
         )
-        logger.info(f"Email notification sent to: {file_data['uploader_email']}")
+
     except Exception as e:
-        logger.error(f"Error sending email: {str(e)}")
+        logger.error(f"Error sending email notification: {str(e)}")
         raise e
 
-def send_admin_notification(file_data):
-    try:
-        message = f"New file uploaded: {file_data['file_name']} in bucket: {file_data['s3_bucket']}"
-        sns.publish(
-            TopicArn=SNS_TOPIC_ARN,
-            Message=message,
-            Subject="New File Uploaded"
-        )
-        logger.info("Admin notification sent via SNS")
-    except Exception as e:
-        logger.error(f"Error sending admin notification: {str(e)}")
-        raise e
+
 
 
 def lambda_handler(event, context):
@@ -149,11 +138,10 @@ def lambda_handler(event, context):
             # Store metadata in DynamoDB
             save_to_dynamodb(combine_data)
 
-            # Send email notification to uploader
+            # Send email notification to admin
             send_email_notification(combine_data)
 
-            # Send admin notification via SNS
-            send_admin_notification(combine_data)
+           
     
     except Exception as e:
         logger.error(f"Error processing message: {str(e)}")

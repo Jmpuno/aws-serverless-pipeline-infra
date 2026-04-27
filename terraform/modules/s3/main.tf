@@ -30,3 +30,15 @@ resource "aws_s3_bucket" "file_bucket" {
 
 
 }
+
+resource "aws_s3_bucket_cors_configuration" "file_bucket_cors" {
+  bucket = aws_s3_bucket.file_bucket.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "HEAD"]
+    allowed_origins = ["https://aws-severless-pipeline-file-uploader.netlify.app"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+}

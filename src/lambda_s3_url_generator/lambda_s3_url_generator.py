@@ -17,12 +17,13 @@ ACCEPTED_FILE_TYPES = [
 ]
 
 CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "http://localhost:5500",
+    "Access-Control-Allow-Origin": "https://aws-severless-pipeline-file-uploader.netlify.app",
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Methods": "POST,OPTIONS"
 }
 
 def lambda_handler(event, context):
+    
     try:
         body = json.loads(event.get("body", "{}"))
 
@@ -38,7 +39,7 @@ def lambda_handler(event, context):
         if content_type not in ACCEPTED_FILE_TYPES:
             return {
                 "statusCode": 400,
-                "headers":CORS_HEADERS,
+                "headers":{},
                 "body": json.dumps({"error": "File type is not allowed"})
             }
 
@@ -46,7 +47,7 @@ def lambda_handler(event, context):
         if not email or not filename:
             return {
                 "statusCode": 400,
-                "headers":CORS_HEADERS,
+                "headers":{},
                 "body": json.dumps({"error": "Missing email or filename"})
             }
 
@@ -71,13 +72,13 @@ def lambda_handler(event, context):
 
         return {
             "statusCode": 200,
-            "headers": CORS_HEADERS,
+            "headers": {},
             "body": json.dumps(presigned_post)
         }
     except Exception as e:
         return {
             "statusCode":500,
-            "headers":CORS_HEADERS,
+            "headers":{},
             "body":json.dumps({
                 "error": "Internal server error"
             })

@@ -151,6 +151,29 @@ resource "aws_iam_role_policy_attachment" "lambda_worker_sqs" {
 
 
 #LAMBDA POLICY
+
+resource "aws_iam_policy" "lambda_s3_url_generator_policy"{
+    name = "${var.project_name}-${var.environment}-lambda-s3-url-generator-policy"
+
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = ["s3:PutObject"]
+                Resource =  "${var.bucket_arn}/*"
+                        
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_s3_url_generator_policy" {
+    role       = aws_iam_role.lambda_s3_url_generator_role.name
+    policy_arn = aws_iam_policy.lambda_s3_url_generator_policy.arn
+}
+
+
 resource "aws_iam_policy" "trigger_lambda_policy"{
     name = "${var.project_name}-${var.environment}-trigger-lambda-policy"
 
