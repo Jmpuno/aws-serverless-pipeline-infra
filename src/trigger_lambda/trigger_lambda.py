@@ -31,6 +31,7 @@ def lambda_handler(event, context):
             sqs_message = {
                 'file_name': file_details['file_name'],
                 'file_size': file_details['size'],
+                'content_type': file_details.get('content_type', 'unknown'),
                 's3_bucket': bucket_name,
                 's3_key':object_key,
                 'upload_timestamp': file_details['last_modified'],
@@ -55,13 +56,14 @@ def get_file_details(bucket_name, object_key):
     try:
         response = s3.head_object(Bucket=bucket_name, Key=object_key)
         file_name = object_key.split('/')[-1]
-        uploader_email = response.get('Metadata', {}).get('uploader-email', 'unknown')
+        uploader_email = response.get('Metadata', {}).get('email', 'unknown')
         
         return {
             'file_name': file_name,
             'size': response['ContentLength'],
             'last_modified': response['LastModified'].isoformat(),
-            'uploader_email': uploader_email
+            'uploader_email': uploader_email,
+            'content_type': response.get('ContentType', 'unknown')
         }
     except Exception as e:
         logger.error(f"Metadata error: {e}")

@@ -74,7 +74,13 @@ def save_to_dynamodb(file_data):
                 's3_key': {'S': file_data['s3_key']},
                 'upload_timestamp': {'S': file_data['upload_timestamp']},
                 'uploader_email': {'S': file_data['uploader_email']},
-                'process_result':   {'S': json.dumps(file_data.get('status', 'unknown'))}
+                'process_result': {'S': json.dumps({
+                'status': file_data.get('status'),
+                'file_type': file_data.get('file_type'),
+                'total_rows': file_data.get('total_rows'),
+                'columns': file_data.get('columns'),
+                'total_keys': file_data.get('total_keys')
+            })}
             }
         )
         logger.info(f"Metadata saved to DynamoDB for file: {file_data['file_name']} with ID: {file_data['FileID']}")
