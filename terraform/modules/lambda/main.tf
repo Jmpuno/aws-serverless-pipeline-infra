@@ -19,6 +19,24 @@ resource "aws_sqs_queue" "trigger_lambda_dlq"{
 }
 
 
+resource "aws_cloudwatch_metric_alarm" "tl_dlq_not_empty"{
+    alarm_name = "${var.project_name}-${var.environment}-sqs-trigger-lambda-dlq-not-empty"
+    comparison_operator = "GreaterThanThreshold"
+    evaluation_periods = 3
+    metric_name = "ApproximateNumberOfMessagesVisible"
+    namespace = "AWS/SQS"
+    period = 60
+    statistic = "Sum"
+    threshold = 5
+    alarm_description = "The alarm fires if for 3 consecutive evaluation periods the metric value remains greater than 5"
+
+
+    dimensions = {
+        QueueName = aws_sqs_queue.trigger_lambda_dlq.name
+    }
+}
+
+
 resource "aws_lambda_function" "trigger_lambda"{
     filename = data.archive_file.trigger_lambda.output_path
     function_name = "${var.project_name}-${var.environment}-trigger-lambda"

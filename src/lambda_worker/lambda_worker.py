@@ -101,9 +101,13 @@ def send_email_notification(file_data):
         Uploader Email: {file_data['uploader_email']}
         Upload Timestamp: {file_data['upload_timestamp']}
         Process Result: {file_data.get('status', 'unknown')}
+        File Type: {file_data.get('file_type')}
+        Total Rows: {file_data.get('total_rows')}
+        Columns: {file_data.get('columns')}
+        Total Keys: {file_data.get('total_keys')}
 
         Best regards,
-        Your Pipeline
+        MattMatt
         """
         ses.send_email(
             Source=SES_SENDER_EMAIL,

@@ -12,3 +12,4 @@ output "lambda_s3_url_generator_logs"{
     description = "output for our lambda s3 url generator logs"
     value = aws_cloudwatch_log_group.lambda_s3_url_generator.name
 }
+

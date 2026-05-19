@@ -7,6 +7,25 @@ resource "aws_sqs_queue" "sqs_queue_dlq"{
 
 
 
+resource "aws_cloudwatch_metric_alarm" "lw_dlq_not_empty"{
+    alarm_name = "${var.project_name}-${var.environment}-sqs-lambda-worker-dlq-not-empty"
+    comparison_operator = "GreaterThanThreshold"
+    evaluation_periods = 3
+    metric_name = "ApproximateNumberOfMessagesVisible"
+    namespace = "AWS/SQS"
+    period = 60
+    statistic = "Sum"
+    threshold = 5
+    alarm_description = "The alarm fires if for 3 consecutive evaluation periods the metric value remains greater than 5"
+
+
+    dimensions = {
+        QueueName = aws_sqs_queue.sqs_queue_dlq.name
+    }
+}
+
+
+
 resource "aws_sqs_queue" "lambda_worker_queue"{
     name = "${var.project_name}-${var.environment}-lambda-worker-queue"
     message_retention_seconds = 345600

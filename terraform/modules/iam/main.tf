@@ -78,6 +78,25 @@ resource "aws_iam_policy" "lambda_cloudwatch_logs"{
     })
 }
 
+resource "aws_iam_policy" "dlq_cloudwatch_metrics_alarm" {
+    name = "${var.project_name}-${var.environment}-dlq-cloudwatch-metric-alarm"
+
+    policy = jsonencode ({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = [
+                    "cloudwatch:PutMetricAlarm",
+                    "cloudwatch:DescribeAlarms",
+                    "cloudwatch:DeleteAlarms"
+                ]
+                Resource = "*"
+            }
+        ]
+    })
+}
+
 resource "aws_iam_role_policy_attachment" "trigger_lambda_logs" {
   role       = aws_iam_role.trigger_lambda_role.name
   policy_arn = aws_iam_policy.lambda_cloudwatch_logs.arn
