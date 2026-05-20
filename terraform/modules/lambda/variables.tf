@@ -80,3 +80,8 @@ variable "ses_sender_email" {
     description = "Verified SES sender email address"
     type        = string
 }
+
+variable "tl_dlq_alarm_notif_arn"{
+    description = "arn for trigger lambda dlq alarm sns topic"
+    type        = string
+}

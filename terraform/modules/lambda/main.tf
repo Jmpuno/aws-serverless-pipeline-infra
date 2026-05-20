@@ -27,14 +27,17 @@ resource "aws_cloudwatch_metric_alarm" "tl_dlq_not_empty"{
     namespace = "AWS/SQS"
     period = 60
     statistic = "Sum"
-    threshold = 5
+    threshold = 1
     alarm_description = "The alarm fires if for 3 consecutive evaluation periods the metric value remains greater than 5"
 
+    alarm_actions = [var.tl_dlq_alarm_notif_arn]
 
     dimensions = {
         QueueName = aws_sqs_queue.trigger_lambda_dlq.name
     }
 }
+
+
 
 
 resource "aws_lambda_function" "trigger_lambda"{

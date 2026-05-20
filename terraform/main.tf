@@ -51,6 +51,7 @@ module "lambda"{
 
   #SNS
   sns_topic_arn = module.sns.sns_topic_arn
+  tl_dlq_alarm_notif_arn = module.sns.tl_dlq_alarm_notif_arn
 
   #SES
   ses_sender_email = var.admin_email
@@ -106,6 +107,9 @@ module "sqs"{
 
   project_name = var.project_name
   environment = var.environment
+
+  #SNS
+  lw_dlq_alarm_notif_arn = module.sns.lw_dlq_alarm_notif_arn
 }
 
 module "sns"{

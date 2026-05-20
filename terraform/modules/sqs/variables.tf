@@ -10,3 +10,8 @@ variable "environment"{
 }
 
 
+variable "lw_dlq_alarm_notif_arn"{
+    description = "arn for lambda worker dlq alarm sns topic"
+    type        = string
+}
+
