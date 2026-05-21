@@ -25,5 +25,5 @@ variable "admin_email"{
 variable "log_level" {
     description = "log_level for lambda function"
     type = string
-    default = "info"
+    default = "INFO"
 }
