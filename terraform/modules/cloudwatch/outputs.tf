@@ -13,3 +13,8 @@ output "lambda_s3_url_generator_logs"{
     value = aws_cloudwatch_log_group.lambda_s3_url_generator.name
 }
 
+
+output "reprocessor_logs" {
+    description = "logs for our lambda reprocessor"
+    value = aws_cloudwatch_log_group.reprocessor.name
+}

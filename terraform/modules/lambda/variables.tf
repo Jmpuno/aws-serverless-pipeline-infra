@@ -21,6 +21,11 @@ variable "trigger_lambda_role_arn"{
     type = string
 }
 
+variable "reprocessor_role"{
+    description = "IAM role arn for lambda reprocessor"
+    type = string
+}
+
 
 #LOG GROUPS FOR LAMBDA FUNCTIONS
 variable "lambda_worker_log_group" {
@@ -30,6 +35,11 @@ variable "lambda_worker_log_group" {
 
 variable "trigger_lambda_log_group" {
     description = "Log group for our trigger lambda"
+    type = string
+}
+
+variable "reprocessor_log_group"{
+    description = "Log group for our lambda reprocessor"
     type = string
 }
 
@@ -61,6 +71,11 @@ variable "lambda_worker_queue_url" {
     type = string
 }
 
+variable "sqs_queue_dlq_url"{
+    description = "lambda worker dlq url"
+    type = string
+}
+
 variable "sns_topic_arn" {
     description = "SNS topic ARN for worker lambda notifications"
     type        = string
@@ -85,3 +100,5 @@ variable "tl_dlq_alarm_notif_arn"{
     description = "arn for trigger lambda dlq alarm sns topic"
     type        = string
 }
+
+

@@ -8,6 +8,11 @@ output "sqs_queue_dlq_arn"{
     value = aws_sqs_queue.sqs_queue_dlq.arn
 }
 
+output "sqs_queue_dlq_url"{
+    description = "URL of lambda worker dlq"
+    value = aws_sqs_queue.sqs_queue_dlq.url
+}
+
 output "lambda_worker_queue_url"{
     description = "URL of main sqs queue for lambda trigger"
     value = aws_sqs_queue.lambda_worker_queue.url

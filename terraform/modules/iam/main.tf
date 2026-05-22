@@ -59,6 +59,23 @@ resource "aws_iam_role" "lambda_s3_url_generator_role"{
 
 }
 
+resource "aws_iam_role" "reprocessor_role"{
+    name = "${var.project_name}-${var.environment}-reprocessor"
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Action = "sts:AssumeRole"
+                Effect = "Allow"
+                Sid = ""
+                Principal = {
+                    Service = "lambda.amazonaws.com"
+                }
+            },
+        ]
+    })
+}
+
 #CLOUDWATCH POLICY
 resource "aws_iam_policy" "lambda_cloudwatch_logs"{
     name = "${var.project_name}-${var.environment}-lambda-logs"
@@ -234,6 +251,34 @@ resource "aws_iam_policy" "lambda_worker_policy"{
 resource "aws_iam_role_policy_attachment" "lambda_worker_policy" {
     role       = aws_iam_role.lambda_worker_role.name
     policy_arn = aws_iam_policy.lambda_worker_policy.arn
+}
+
+resource "aws_iam_policy" "reprocessor_policy"{
+    name = "${var.project_name}-${var.environment}-reprocessor"
+
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = [
+                    "sqs:ReceiveMessage",
+                    "sqs:DeleteMessage",
+                    "sqs:SendMessage"
+                ]
+                Resource = [
+                    var.sqs_queue_arn,
+                    var.sqs_dlq_arn,
+                    var.sqs_queue_dlq_arn
+                ]
+            }
+        ]
+    }) 
+}
+
+resource "aws_iam_role_policy_attachment" "reprocessor_policy"{
+    role = aws_iam_role.reprocessor_role.name
+    policy_arn = aws_iam_policy.reprocessor_policy.arn
 }
 
 

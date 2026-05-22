@@ -19,6 +19,11 @@ variable "sqs_dlq_arn"{
     type = string
 }
 
+variable "sqs_queue_dlq_arn"{
+    description = " sqs dlq arn for lambda reprocessor"
+    type = string
+}
+
 variable "bucket_arn"{
     description = "s3 bucket arn for trigger lambda policy"
     type = string

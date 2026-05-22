@@ -11,3 +11,8 @@ output "lambda_s3_url_generator_role"{
     description = "IAM role arn for our s3 url generator"
     value = aws_iam_role.lambda_s3_url_generator_role.arn
 }
+
+output "reprocessor_role"{
+    description = "IAM role arn for our lambda reprocessor"
+    value = aws_iam_role.reprocessor_role.arn
+}

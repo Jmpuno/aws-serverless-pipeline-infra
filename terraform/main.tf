@@ -39,15 +39,18 @@ module "lambda"{
   #IAM ROLES
   lambda_worker_role_arn = module.iam.lambda_worker_role
   trigger_lambda_role_arn = module.iam.trigger_lambda_role
+  reprocessor_role = module.iam.reprocessor_role
 
   #CLOUD WATCH LOG GROUPS
   lambda_worker_log_group = module.cloudwatch.lambda_worker_logs
   trigger_lambda_log_group = module.cloudwatch.trigger_lambda_logs
+  reprocessor_log_group = module.cloudwatch.reprocessor_logs
   log_level = var.log_level
 
   #SQS 
   lambda_worker_queue_arn = module.sqs.lambda_worker_queue_arn
   lambda_worker_queue_url = module.sqs.lambda_worker_queue_url
+  sqs_queue_dlq_url = module.sqs.sqs_queue_dlq_url
 
   #SNS
   sns_topic_arn = module.sns.sns_topic_arn
@@ -93,6 +96,7 @@ module "iam"{
 
   sqs_queue_arn = module.sqs.lambda_worker_queue_arn
   sqs_dlq_arn   = module.lambda.trigger_lambda_dlq_arn
+  sqs_queue_dlq_arn = module.sqs.sqs_queue_dlq_arn
 
   dynamodb_table_arn = module.dynamodb.dynamodb_table_arn
 
