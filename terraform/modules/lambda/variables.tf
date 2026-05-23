@@ -26,6 +26,11 @@ variable "reprocessor_role"{
     type = string
 }
 
+variable "scheduler_role_arn"{
+    description = "IAM role arn for scheduler"
+    type = string
+}
+
 
 #LOG GROUPS FOR LAMBDA FUNCTIONS
 variable "lambda_worker_log_group" {
@@ -100,5 +105,7 @@ variable "tl_dlq_alarm_notif_arn"{
     description = "arn for trigger lambda dlq alarm sns topic"
     type        = string
 }
+
+
 
 

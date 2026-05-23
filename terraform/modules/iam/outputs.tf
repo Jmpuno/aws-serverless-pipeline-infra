@@ -16,3 +16,8 @@ output "reprocessor_role"{
     description = "IAM role arn for our lambda reprocessor"
     value = aws_iam_role.reprocessor_role.arn
 }
+
+output "scheduler_role"{
+    description = "IAM role arn for our lambda reprocessor"
+    value = aws_iam_role.scheduler_role.arn
+}

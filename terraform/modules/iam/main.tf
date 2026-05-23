@@ -76,6 +76,24 @@ resource "aws_iam_role" "reprocessor_role"{
     })
 }
 
+resource "aws_iam_role" "scheduler_role"{
+    name = "${var.project_name}-${var.environment}-scheduler_role"
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Action = "sts:AssumeRole"
+                Effect = "Allow"
+                Sid = ""
+                Principal = {
+                    Service = "scheduler.amazonaws.com"
+                }
+            },
+        ]
+    })
+}
+
+
 #CLOUDWATCH POLICY
 resource "aws_iam_policy" "lambda_cloudwatch_logs"{
     name = "${var.project_name}-${var.environment}-lambda-logs"
@@ -280,6 +298,29 @@ resource "aws_iam_role_policy_attachment" "reprocessor_policy"{
     role = aws_iam_role.reprocessor_role.name
     policy_arn = aws_iam_policy.reprocessor_policy.arn
 }
+
+resource "aws_iam_policy" "scheduler_policy"{
+    name = "${var.project_name}-${var.environment}-scheduler"
+
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = ["lambda:InvokeFunction"]
+                Resource = [
+                    var.reprocessor_arn
+                ]
+            }
+        ]
+    }) 
+}
+
+resource "aws_iam_role_policy_attachment" "scheduler_policy"{
+    role = aws_iam_role.scheduler_role.name
+    policy_arn = aws_iam_policy.scheduler_policy.arn
+}
+
 
 
 

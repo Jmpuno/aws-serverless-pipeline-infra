@@ -43,3 +43,8 @@ variable "sns_topic_arn"{
     description = "SNS topic arn for policy"
     type = string
 }
+
+variable "reprocessor_arn"{
+    description = "arn of our lambda reprocessor"
+    type = string
+}

@@ -40,6 +40,7 @@ module "lambda"{
   lambda_worker_role_arn = module.iam.lambda_worker_role
   trigger_lambda_role_arn = module.iam.trigger_lambda_role
   reprocessor_role = module.iam.reprocessor_role
+  scheduler_role_arn = module.iam.scheduler_role
 
   #CLOUD WATCH LOG GROUPS
   lambda_worker_log_group = module.cloudwatch.lambda_worker_logs
@@ -103,6 +104,8 @@ module "iam"{
   admin_email_identity_arn = module.ses.admin_email_identity_arn
 
   sns_topic_arn = module.sns.sns_topic_arn
+
+  reprocessor_arn = module.lambda.reprocessor_arn
 
 }
 

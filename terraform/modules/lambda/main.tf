@@ -153,3 +153,15 @@ resource "aws_lambda_function" "reprocessor"{
         log_group             = var.reprocessor_log_group
     }
 }
+
+
+resource "aws_scheduler_schedule" "reprocessor" {
+    name = "dlq-reprocessor-schedule"
+    flexible_time_window { mode = "OFF"}
+    schedule_expression = "rate(5 minutes)"
+
+    target{
+        arn = aws_lambda_function.reprocessor.arn
+        role_arn = var.scheduler_role_arn
+    }
+}
