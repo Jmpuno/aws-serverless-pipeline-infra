@@ -27,6 +27,10 @@ jobs:
       - name: Create tfvars file
         run: printf '%s' "${{ secrets.TF_VARS_DEV }}" > environments/dev/dev.tfvars
         working-directory: terraform
+        
+      - name: Debug tfvars file
+        run: cat environments/dev/dev.tfvars
+        working-directory: terraform
 
       - name:  Terraform init
         run: terraform init
