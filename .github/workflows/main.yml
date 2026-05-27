@@ -36,8 +36,11 @@ jobs:
         run: terraform init
         working-directory: terraform
 
-      - name: Terraform Plan
-        run: terraform plan -var-file="environments/dev/dev.tfvars"
+      - name: Create tfvars file
+        run: |
+          cat <<'TFVARS' > environments/dev/dev.tfvars
+          ${{ secrets.TF_VARS_DEV }}
+          TFVARS
         working-directory: terraform
 
       - name: Terraform Apply
