@@ -26,4 +26,4 @@ resource "aws_sns_topic_subscription" "admin_email" {
   endpoint  = var.admin_email
 }
 
-
+#test
