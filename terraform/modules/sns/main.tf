@@ -11,20 +11,19 @@ resource "aws_sns_topic" "lw_dlq_alarm_notif"{
 }
 
 locals {
-    topic_to_subscribe = [
-        aws_sns_topic.lambda_response.arn,
-        aws_sns_topic.tl_dlq_alarm_notif.arn,
-        aws_sns_topic.lw_dlq_alarm_notif.arn
-    ]
+  topic_to_subscribe = {
+    lambda_response    = aws_sns_topic.lambda_response.arn
+    tl_dlq_alarm_notif = aws_sns_topic.tl_dlq_alarm_notif.arn
+    lw_dlq_alarm_notif = aws_sns_topic.lw_dlq_alarm_notif.arn
+  }
 }
 
-resource "aws_sns_topic_subscription" "admin_email"{
-    for_each = toset(local.topic_to_subscribe)
+resource "aws_sns_topic_subscription" "admin_email" {
+  for_each = local.topic_to_subscribe
 
-    topic_arn = each.value
-    protocol = "email"
-    endpoint = var.admin_email
+  topic_arn = each.value
+  protocol  = "email"
+  endpoint  = var.admin_email
 }
-
 
 
