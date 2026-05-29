@@ -1,23 +1,23 @@
-resource "aws_cloudwatch_log_group" "trigger_lambda"{
-    name = "/aws/lambda/${var.project_name}-${var.environment}-trigger-lambda"
+resource "aws_cloudwatch_log_group" "trigger_lambda" {
+  name = "/aws/lambda/${var.project_name}-${var.environment}-trigger-lambda"
 
-    retention_in_days = 30
+  retention_in_days = 30
 
 }
 
-resource "aws_cloudwatch_log_group" "lambda_worker"{
-    name = "/aws/lambda/${var.project_name}-${var.environment}-lambda-worker"
+resource "aws_cloudwatch_log_group" "lambda_worker" {
+  name = "/aws/lambda/${var.project_name}-${var.environment}-lambda-worker"
 
-    retention_in_days = 30
+  retention_in_days = 30
 }
-resource "aws_cloudwatch_log_group" "lambda_s3_url_generator"{
-    name = "/aws/lambda/${var.project_name}-${var.environment}-lambda-s3-url-generator"
+resource "aws_cloudwatch_log_group" "lambda_s3_url_generator" {
+  name = "/aws/lambda/${var.project_name}-${var.environment}-lambda-s3-url-generator"
 
-    retention_in_days = 30
+  retention_in_days = 30
 }
 
-resource "aws_cloudwatch_log_group" "reprocessor"{
-    name = "/aws/lambda/${var.project_name}-${var.environment}-reprocessor"
+resource "aws_cloudwatch_log_group" "reprocessor" {
+  name = "/aws/lambda/${var.project_name}-${var.environment}-reprocessor"
 
-    retention_in_days = 30
+  retention_in_days = 30
 }

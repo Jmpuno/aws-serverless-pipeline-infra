@@ -1,59 +1,59 @@
-variable "project_name"{
-    description = "variable for project name"
-    type = string
+variable "project_name" {
+  description = "variable for project name"
+  type        = string
 }
 
 
-variable "environment"{
-    description= "The deployment environment"
-    type = string
+variable "environment" {
+  description = "The deployment environment"
+  type        = string
 }
 
 
 #IAM ROLES FOR LAMBDA FUNCTIONS
-variable "lambda_worker_role_arn"{
-    description = "IAM role arn for lambda_worker"
-    type = string
+variable "lambda_worker_role_arn" {
+  description = "IAM role arn for lambda_worker"
+  type        = string
 }
 
-variable "trigger_lambda_role_arn"{
-    description = "IAM role arn for trigger_lambda"
-    type = string
+variable "trigger_lambda_role_arn" {
+  description = "IAM role arn for trigger_lambda"
+  type        = string
 }
 
-variable "reprocessor_role"{
-    description = "IAM role arn for lambda reprocessor"
-    type = string
+variable "reprocessor_role" {
+  description = "IAM role arn for lambda reprocessor"
+  type        = string
 }
 
-variable "scheduler_role_arn"{
-    description = "IAM role arn for scheduler"
-    type = string
+variable "scheduler_role_arn" {
+  description = "IAM role arn for scheduler"
+  type        = string
 }
 
 
 #LOG GROUPS FOR LAMBDA FUNCTIONS
 variable "lambda_worker_log_group" {
-    description = "Log group for our lambda worker"
-    type = string
+  description = "Log group for our lambda worker"
+  type        = string
 }
 
 variable "trigger_lambda_log_group" {
-    description = "Log group for our trigger lambda"
-    type = string
+  description = "Log group for our trigger lambda"
+  type        = string
 }
 
-variable "reprocessor_log_group"{
-    description = "Log group for our lambda reprocessor"
-    type = string
+variable "reprocessor_log_group" {
+  description = "Log group for our lambda reprocessor"
+  type        = string
 }
 
 
 #log_level
 variable "log_level" {
-    description = "log_level for lambda function"
-    type = string
-    default = "info"
+  description = "log_level for lambda function"
+  type        = string
+  default     = "info"
 }
 
 
@@ -67,43 +67,43 @@ variable "log_level" {
 #SQS ARN
 
 variable "lambda_worker_queue_arn" {
-    description = "SQS arn for lambda worker"
-    type = string
+  description = "SQS arn for lambda worker"
+  type        = string
 }
 
 variable "lambda_worker_queue_url" {
-    description = "sqs url for trigger lambda"
-    type = string
+  description = "sqs url for trigger lambda"
+  type        = string
 }
 
-variable "sqs_queue_dlq_url"{
-    description = "lambda worker dlq url"
-    type = string
+variable "sqs_queue_dlq_url" {
+  description = "lambda worker dlq url"
+  type        = string
 }
 
 variable "sns_topic_arn" {
-    description = "SNS topic ARN for worker lambda notifications"
-    type        = string
+  description = "SNS topic ARN for worker lambda notifications"
+  type        = string
 }
 
 variable "dynamodb_table_name" {
-    description = "DynamoDB table name for storing results"
-    type        = string
+  description = "DynamoDB table name for storing results"
+  type        = string
 }
 
-variable "bucket_name"{
-    description = "s3 bucket name for our lambda"
-    type = string
+variable "bucket_name" {
+  description = "s3 bucket name for our lambda"
+  type        = string
 }
 
 variable "ses_sender_email" {
-    description = "Verified SES sender email address"
-    type        = string
+  description = "Verified SES sender email address"
+  type        = string
 }
 
-variable "tl_dlq_alarm_notif_arn"{
-    description = "arn for trigger lambda dlq alarm sns topic"
-    type        = string
+variable "tl_dlq_alarm_notif_arn" {
+  description = "arn for trigger lambda dlq alarm sns topic"
+  type        = string
 }
 
 

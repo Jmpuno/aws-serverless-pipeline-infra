@@ -1,14 +1,14 @@
-resource "aws_dynamodb_table" "pipeline_db_table"{
-    name = "${var.project_name}-${var.environment}-pipeline-db-table"
-    billing_mode = "PAY_PER_REQUEST"
-    hash_key = "FileID"
+resource "aws_dynamodb_table" "pipeline_db_table" {
+  name         = "${var.project_name}-${var.environment}-pipeline-db-table"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "FileID"
 
-    attribute {
-        name = "FileID"
-        type = "S"
-    }
+  attribute {
+    name = "FileID"
+    type = "S"
+  }
 
-    tags = {
-        Name = "pipeline-db-table"
-    }
+  tags = {
+    Name = "pipeline-db-table"
+  }
 }

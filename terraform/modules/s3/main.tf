@@ -22,11 +22,11 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
 
 
 resource "aws_s3_bucket" "file_bucket" {
-    bucket = "${var.project_name}-${var.environment}-file-bucket-${data.aws_caller_identity.current.account_id}"
+  bucket = "${var.project_name}-${var.environment}-file-bucket-${data.aws_caller_identity.current.account_id}"
 
-    tags = {
-        dataClassification = "confidential"
-    }
+  tags = {
+    dataClassification = "confidential"
+  }
 
 
 }

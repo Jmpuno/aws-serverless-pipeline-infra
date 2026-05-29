@@ -1,12 +1,12 @@
-variable "project_name"{
-    description = "variable for project name"
-    type = string
+variable "project_name" {
+  description = "variable for project name"
+  type        = string
 }
 
-variable "environment"{
-    description= "The deployment environment"
-    type = string
-    default = "dev"
+variable "environment" {
+  description = "The deployment environment"
+  type        = string
+  default     = "dev"
 }
 
 
@@ -16,14 +16,14 @@ variable "allowed_origin" {
   type        = string
 }
 
-variable "admin_email"{
-    description = "Email address of the admin"
-    type = string
+variable "admin_email" {
+  description = "Email address of the admin"
+  type        = string
 }
 
 
 variable "log_level" {
-    description = "log_level for lambda function"
-    type = string
-    default = "INFO"
+  description = "log_level for lambda function"
+  type        = string
+  default     = "INFO"
 }
