@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request: 
     branches: [main]
+    
+concurrency:
+  group: terraform-prod
+  cancel-in-progress: false
 
 jobs:
   terraform:
@@ -31,30 +35,23 @@ jobs:
           TFVARS
         working-directory: terraform
         
-      - name: Debug tfvars file
-        run: cat environments/dev/dev.tfvars
-        working-directory: terraform
-
       - name:  Terraform init
         run: terraform init
         working-directory: terraform
-
+        
+      - name: Terraform Format Check
+        run: terraform fmt -check
+        working-directory: terraform
+      
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: terraform
+      
+      - name: Terraform Plan
+        run: terraform plan -var-file="environments/dev/dev.tfvars"
+        working-directory: terraform
+      
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -var-file="environments/dev/dev.tfvars"
         working-directory: terraform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
