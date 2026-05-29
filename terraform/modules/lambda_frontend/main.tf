@@ -48,3 +48,11 @@ resource "aws_lambda_function" "lambda_s3_url_generator" {
     log_group             = var.lambda_s3_url_generator_log_group
   }
 }
+
+resource "aws_lambda_permission" "allow_public_url" {
+  statement_id           = "FunctionURLAllowPublicAccess"
+  action                 = "lambda:InvokeFunctionUrl"
+  function_name          = aws_lambda_function.lambda_s3_url_generator.function_name
+  principal              = "*"
+  function_url_auth_type = "NONE"
+}
